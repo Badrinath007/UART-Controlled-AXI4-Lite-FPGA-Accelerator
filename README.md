@@ -1,32 +1,42 @@
 # UART-Controlled AXI4-Lite FPGA Accelerator
 
-## 📌 Overview
+## Overview
 
-This project implements a UART-controlled hardware accelerator using an AXI4-Lite interface on FPGA.
+- This project implements a UART-controlled hardware accelerator using an AXI4-Lite interface on FPGA.
 
-The system allows a host PC to communicate with an FPGA accelerator via UART, enabling register read/write operations through a custom AXI4-Lite bridge.
+- The system allows a host PC to communicate with an FPGA accelerator via UART, enabling register read/write operations through a custom AXI4-Lite bridge.
 
-This design mimics real-world SoC architectures where peripherals are accessed through memory-mapped interfaces.
+- This design mimics real-world SoC architectures where peripherals are accessed through memory-mapped interfaces.
 
 ---
 
-## 🏗️ System Architecture
+## System Architecture
 
 PC (Terminal)
+
 ↓
+
 UART RX
+
 ↓
+
 Command Decoder
+
 ↓
+
 AXI4-Lite Master Interface
+
 ↓
+
 Hardware Accelerator (AXI Slave Registers)
+
 ↓
+
 Result → UART TX → PC
 
 ---
 
-## ⚙️ Design Components
+## Design Components
 
 ### 1. UART Interface
 
@@ -51,7 +61,7 @@ Result → UART TX → PC
 
 ---
 
-## 🧪 Simulation & Verification
+## Simulation & Verification
 
 * Verified UART transmission and reception
 * Tested AXI read/write transactions
@@ -61,7 +71,7 @@ Result → UART TX → PC
 
 ---
 
-## 🧠 FPGA Implementation
+## FPGA Implementation
 
 * Implemented on Cyclone IV FPGA
 * UART connected via USB-to-Serial interface
@@ -75,7 +85,7 @@ Result → UART TX → PC
 
 ---
 
-## 📊 Key Features
+## Key Features
 
 * UART-to-AXI protocol bridging
 * Memory-mapped register control
@@ -84,7 +94,7 @@ Result → UART TX → PC
 
 ---
 
-## 🛠️ Tools Used
+## Tools Used
 
 * Verilog / SystemVerilog
 * Quartus Prime
@@ -92,7 +102,7 @@ Result → UART TX → PC
 
 ---
 
-## 🚧 Challenges & Learnings
+## Challenges & Learnings
 
 * Handling AXI handshake signals correctly
 * Synchronizing UART data with AXI transactions
