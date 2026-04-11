@@ -1,4 +1,4 @@
-# UART-to-AXI4-Lite Bridge for FPGA Accelerator
+# UART-Controlled AXI4-Lite FPGA Accelerator
 
 ## 📌 Overview
 
