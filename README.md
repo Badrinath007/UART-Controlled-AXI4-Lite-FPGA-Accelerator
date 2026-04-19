@@ -92,8 +92,6 @@ READ  0x04
 * Tested AXI read/write transactions
 * Validated correct register access via simulation waveforms
 
-(Add GTKWave screenshots here)
-
 ---
 
 ## FPGA Implementation
