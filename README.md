@@ -135,6 +135,11 @@ Output → Computed result returned via UART
 
 ---
 
+## Waveform
+
+<img width="1591" height="560" alt="Waveform_simulation" src="https://github.com/user-attachments/assets/2ad92fdf-cadb-46ee-8241-d928a1178c72" />
+
+---
 
 ## Challenges & Learnings
 
