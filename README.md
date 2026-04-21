@@ -10,11 +10,11 @@
 
 ## Key Highlights
 
-⚡ AXI4-Lite compliant register interface for controlled access.
-🧠 Modular RTL design with clear separation of functional blocks.
-🔄 Independent datapath and control logic implementation.
-💡 FPGA-based validation using LED/GPIO debug outputs.
-🧩 Designed for easy extension and reuse in larger designs.
+- AXI4-Lite compliant register interface for controlled access.
+- Modular RTL design with clear separation of functional blocks.
+- Independent datapath and control logic implementation.
+- FPGA-based validation using LED/GPIO debug outputs.
+- Designed for easy extension and reuse in larger designs.
 
 ---
 
@@ -29,6 +29,7 @@ Handles communication through a register-mapped interface:
 - Read/write transaction handling.
 - Address decoding.
 - Control signal generation.
+
 2. Control Unit (FSM-Based)
 
 A finite state machine manages system behavior:
@@ -36,6 +37,7 @@ A finite state machine manages system behavior:
 - Operation sequencing.
 - Coordination between the interface and the compute logic.
 - Deterministic execution flow.
+
 3. Core Compute Unit
 
 Implements the main processing logic:
@@ -43,6 +45,7 @@ Implements the main processing logic:
 - Arithmetic and logic operations.
 - Parameterized RTL design.
 - Independent from the interface logic.
+
 4. Output / Debug Interface
 
 Provides runtime visibility using FPGA resources:
@@ -52,17 +55,11 @@ Provides runtime visibility using FPGA resources:
 
 ---
 
-Block Diagram (Conceptual Flow)
+## Block Diagram (Conceptual Flow)
 
 The system is organized as a sequential hardware flow:
 
-AXI4-Lite Interface.
-⬇
-Control FSM.
-⬇
-Core Compute Unit.
-⬇
-Output / Debug Signals (LED/GPIO).
+AXI4-Lite Interface--->Control FSM--->Core Compute Unit--->Output / Debug Signals (LED/GPIO)
 
 ---
 
@@ -114,12 +111,13 @@ This structure improves:
 
 ---
 
-Future Improvements
-📈 Performance optimization (timing/throughput improvements).
-📊 Add internal performance counters (cycle tracking).
-🔗 Expand register map for additional operations.
-🧪 Improve testbench coverage and verification depth.
-🧱 Extend design into multi-module accelerator systems.
+## Future Improvements
+
+- Performance optimization (timing/throughput improvements).
+- Add internal performance counters (cycle tracking).
+- Expand register map for additional operations.
+- Improve testbench coverage and verification depth.
+- Extend design into multi-module accelerator systems.
 
 ---
 
