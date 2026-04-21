@@ -2,136 +2,92 @@
 
 ## Overview
 
-The system bridges low-speed serial communication (UART) with a standard on-chip bus (AXI4-Lite), replicating how real-world SoCs expose peripherals for software control.
+- This project implements a modular FPGA-based hardware accelerator using the AXI4-Lite interface protocol.
+- The design focuses on clean RTL structure, modularity, and ease of integration between functional blocks.
+- The system is implemented and verified on an FPGA using simulation and on-board hardware debugging techniques.
 
 ---
 
-## Block Diagram
+## Key Highlights
 
-<img width="1536" height="1024" alt="Block Diagram" src="https://github.com/user-attachments/assets/5d0b51d7-67ca-4c65-af0f-7401e007c77b" />
-
----
-
-## System Architecture
-
-PC (Terminal)
-
-↓
-
-UART RX
-
-↓
-
-Command Decoder
-
-↓
-
-AXI4-Lite Master Interface
-
-↓
-
-Hardware Accelerator (AXI Slave Registers)
-
-↓
-
-Result → UART TX → PC
+⚡ AXI4-Lite compliant register interface for controlled access.
+🧠 Modular RTL design with clear separation of functional blocks.
+🔄 Independent datapath and control logic implementation.
+💡 FPGA-based validation using LED/GPIO debug outputs.
+🧩 Designed for easy extension and reuse in larger designs.
 
 ---
 
-## 🧾 UART Command Format
+## Architecture Overview
 
-The system accepts simple commands over UART to perform AXI read/write operations.
+The design is structured into clearly separated hardware blocks:
 
-### Example:
+1. AXI4-Lite Interface Module
 
-WRITE <address> <data>  
-READ  <address>
+Handles communication through a register-mapped interface:
 
-### Sample Interaction:
+- Read/write transaction handling.
+- Address decoding.
+- Control signal generation.
+2. Control Unit (FSM-Based)
 
-WRITE 0x00 0x05  
-READ  0x04  
+A finite state machine manages system behavior:
 
-→ FPGA processes command and returns result over UART
+- Operation sequencing.
+- Coordination between the interface and the compute logic.
+- Deterministic execution flow.
+3. Core Compute Unit
 
----
+Implements the main processing logic:
 
-## Design Components
+- Arithmetic and logic operations.
+- Parameterized RTL design.
+- Independent from the interface logic.
+4. Output / Debug Interface
 
-### 1. UART Interface
+Provides runtime visibility using FPGA resources:
 
-* Implements asynchronous serial communication (TX/RX)
-* Configurable baud rate
-* Handles byte-level data transfer
-
-### 2. UART Command Decoder
-
-* Parses incoming UART commands
-* Converts them into AXI read/write transactions
-
-### 3. AXI4-Lite Master
-
-* Generates AXI transactions (address, data, control)
-* Interfaces with hardware accelerator registers
-* Implements AXI valid-ready handshake protocol
-* Handles write and read transactions independently
-* Ensures proper synchronization between UART input and AXI operations
-
-### 4. Hardware Accelerator (AXI Slave)
-
-* Memory-mapped register interface
-* Performs computation based on input data
+- LED/GPIO-based output signals.
+- Used for functional verification on hardware.
 
 ---
 
-## Simulation & Verification
+Block Diagram (Conceptual Flow)
 
-* Verified UART transmission and reception
-* Verified at 115200 baud UART communication
-* Successfully executed multiple read/write transactions without data loss
-* Tested AXI read/write transactions
-* Validated correct register access via simulation waveforms
+The system is organized as a sequential hardware flow:
 
----
-
-## FPGA Implementation
-
-- Target Device: Cyclone IV FPGA
-- UART connected via USB-to-Serial interface
-
-### Hardware Demo:
-
-1. User sends command from PC terminal  
-2. UART receives and decodes command  
-3. AXI transaction executed on accelerator  
-4. Result transmitted back over UART  
-
-Example:
-Input  → WRITE 0x00 0x05  
-Output → Computed result returned via UART
-
-## 🔑 Key Features
-
-* UART-to-AXI protocol bridging
-* Memory-mapped register control
-* Modular RTL design
-* Hardware validation on FPGA
+AXI4-Lite Interface.
+⬇
+Control FSM.
+⬇
+Core Compute Unit.
+⬇
+Output / Debug Signals (LED/GPIO).
 
 ---
 
-## Tools Used
+## Design Approach
 
-* Verilog / SystemVerilog
-* Quartus Prime
-* GTKWave
+The design follows a clean, modular hardware design methodology:
+
+- Interface logic is separated from computation.
+- Control logic is isolated in a dedicated FSM.
+- Compute logic is reusable and independent.
+- Debug outputs allow direct hardware observation.
+
+This structure improves:
+
+- Readability of RTL.
+- Debug efficiency.
+- Design reuse for future projects.
 
 ---
 
-## 📊 Results
-
-- Successful UART-to-AXI communication established
-- Correct register read/write verified on hardware
-- System demonstrates reliable PC-to-FPGA control interface
+## Verification Approach
+- RTL simulation using testbenches.
+- AXI4-Lite transaction verification.
+- Functional validation of compute logic.
+- FPGA-level testing using LED/GPIO outputs.
 
 ---
 
@@ -141,17 +97,41 @@ Output → Computed result returned via UART
 
 ---
 
-## Challenges & Learnings
-
-* Handling AXI handshake signals correctly
-* Synchronizing UART data with AXI transactions
-* Debugging hardware communication issues
+## Hardware Platform
+- FPGA Board: Cyclone IV (EP4CE6E22C8N).
+- Toolchain: Quartus Prime 18.1 Lite edition, Icarus Verilog.
+- Simulation: ModelSim, GTKwave.
+- Interface: AXI4-Lite (internal), GPIO (debug output).
 
 ---
 
-## 🔮 Future Improvements
+## Current Status
+- AXI4-Lite interface implemented and verified using the FPGA Board.
+- FSM-based control logic is working as expected.
+- Core compute unit functional.
+- Hardware validation completed using on-board debug outputs.
+- External communication interfaces not included.
 
-* Add FIFO buffering for UART
-* Support burst transactions
-* Extend to AXI4 / AXI-Stream
-* Integrate with RISC-V core
+---
+
+Future Improvements
+📈 Performance optimization (timing/throughput improvements).
+📊 Add internal performance counters (cycle tracking).
+🔗 Expand register map for additional operations.
+🧪 Improve testbench coverage and verification depth.
+🧱 Extend design into multi-module accelerator systems.
+
+---
+
+## Key Learning Outcomes
+- AXI4-Lite protocol implementation in RTL.
+- FSM-based control design.
+- Modular hardware architecture design.
+- FPGA synthesis and hardware deployment flow.
+- Debugging using minimal hardware resources.
+
+---
+
+## Note
+
+This project demonstrates a modular FPGA-based hardware accelerator design, focusing on clean RTL structure, functional separation, and practical hardware validation.
