@@ -1,9 +1,0 @@
-Major Project Compilation commands 
-
-iverilog -g2012 -Wall -o simv _tb.sv rtl/**/*.v
-vvp simv
-gtkwave dump.vcd
-------------------------------------------
-iverilog -g2012 -o simv uart_top_tb.sv *.v
-vvp simv
-gtkwave uart_phy.vcd
